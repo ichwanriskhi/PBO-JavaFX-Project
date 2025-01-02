@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.gluonhq.charm.glisten.control.TextField?>
+<?import io.github.palexdev.materialfx.controls.MFXButton?>
+<?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1">
+   <left>
+      <VBox prefHeight="720.0" prefWidth="228.0" BorderPane.alignment="CENTER">
+         <children>
+            <MFXScrollPane prefHeight="724.0" prefWidth="228.0">
+               <content>
+                  <VBox alignment="TOP_CENTER" prefHeight="401.0" prefWidth="222.0">
+                     <children>
+                        <ImageView fitHeight="51.0" fitWidth="159.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@images/logo.png" />
+                           </image>
+                        </ImageView>
+                        <MFXButton maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="222.0" text="Beranda">
+                           <graphic>
+                              <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/option.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets top="12.0" />
+                           </VBox.margin>
+                        </MFXButton>
+                        <MFXButton layoutX="10.0" layoutY="49.0" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="222.0" text="Data Barang">
+                           <graphic>
+                              <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/shipping.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets top="12.0" />
+                           </VBox.margin>
+                        </MFXButton>
+                        <MFXButton layoutX="10.0" layoutY="78.0" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="222.0" text="Data Kategori">
+                           <graphic>
+                              <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/menu.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets top="12.0" />
+                           </VBox.margin>
+                        </MFXButton>
+                        <MFXButton layoutX="10.0" layoutY="107.0" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="222.0" text="Data Lelang">
+                           <graphic>
+                              <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
+                                 <image>
+                                    <Image url="@images/auction.png" />
+                                 </image>
+                              </ImageView>
+                           </graphic>
+                           <VBox.margin>
+                              <Insets top="12.0" />
+                           </VBox.margin>
+                        </MFXButton>
+                     </children>
+                  </VBox>
+               </content>
+               <VBox.margin>
+                  <Insets />
+               </VBox.margin>
+               <padding>
+                  <Insets top="30.0" />
+               </padding>
+            </MFXScrollPane>
+         </children>
+      </VBox>
+   </left>
+   <center>
+      <VBox prefHeight="720.0" prefWidth="1086.0" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets />
+         </BorderPane.margin>
+         <children>
+            <Label text="Data Barang">
+               <VBox.margin>
+                  <Insets bottom="20.0" left="20.0" top="20.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+            </Label>
+            <HBox prefHeight="10.0" prefWidth="200.0">
+               <children>
+                  <Label text="Nama Barang" />
+                  <Pane prefHeight="65.0" prefWidth="61.0" />
+                  <TextField prefHeight="25.0" prefWidth="862.0" />
+               </children>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="30.0" layoutY="67.0" prefHeight="10.0" prefWidth="200.0">
+               <children>
+                  <Label text="Jenis Barang" />
+                  <Pane prefHeight="25.0" prefWidth="68.0" />
+                  <ChoiceBox prefHeight="25.0" prefWidth="862.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets right="20.0" top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="138.0" prefHeight="10.0" prefWidth="200.0">
+               <children>
+                  <Label text="Kategori Barang" />
+                  <Pane prefHeight="25.0" prefWidth="47.0" />
+                  <ChoiceBox prefHeight="25.0" prefWidth="861.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" top="10.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets right="20.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="163.0" prefHeight="109.0" prefWidth="1037.0">
+               <children>
+                  <Label text="Deskripsi Barang" />
+                  <Pane prefHeight="39.0" prefWidth="44.0" />
+                  <TextArea prefHeight="99.0" prefWidth="861.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" top="10.0" />
+               </padding>
+            </HBox>
+            <HBox layoutX="45.0" layoutY="103.0" prefHeight="10.0" prefWidth="200.0">
+               <children>
+                  <Label text="Nama Penjual" />
+                  <Pane prefHeight="25.0" prefWidth="60.0" />
+                  <TextField prefHeight="25.0" prefWidth="859.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="318.0" prefHeight="10.0" prefWidth="200.0">
+               <children>
+                  <Label text="Harga Barang" />
+                  <Pane prefHeight="25.0" prefWidth="60.0" />
+                  <TextField prefHeight="25.0" prefWidth="860.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox layoutX="25.0" layoutY="353.0" prefHeight="10.0" prefWidth="200.0">
+               <children>
+                  <Label text="Tanggal Pengajuan" />
+                  <Pane prefHeight="25.0" prefWidth="32.0" />
+                  <DatePicker prefHeight="25.0" prefWidth="860.0" />
+               </children>
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <HBox alignment="CENTER" prefHeight="10.0" prefWidth="200.0">
+               <padding>
+                  <Insets left="20.0" />
+               </padding>
+               <children>
+                  <MFXButton alignment="CENTER" rippleColor="#4154f1" text="Simpan" />
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
+            </HBox>
+            <TableView prefHeight="227.0" prefWidth="997.0">
+              <columns>
+                <TableColumn prefWidth="91.9999669790268" text="Kode Barang" />
+                <TableColumn prefWidth="120.00006866455078" text="Nama Barang" />
+                  <TableColumn prefWidth="90.66667175292969" text="Jenis" />
+                  <TableColumn prefWidth="90.66667175292969" text="Kategori" />
+                  <TableColumn prefWidth="211.99996948242188" text="Deskripsi" />
+                  <TableColumn prefWidth="106.6666259765625" text="Penjual" />
+                  <TableColumn prefWidth="108.666748046875" text="Harga" />
+                  <TableColumn prefWidth="171.3333740234375" text="Tanggal Pengajuan" />
+              </columns>
+               <VBox.margin>
+                  <Insets left="20.0" right="20.0" top="20.0" />
+               </VBox.margin>
+            </TableView>
+         </children>
+         <padding>
+            <Insets left="15.0" top="15.0" />
+         </padding>
+      </VBox>
+   </center>
+</BorderPane>
