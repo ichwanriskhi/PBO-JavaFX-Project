@@ -108,7 +108,7 @@
                <children>
                   <Label text="Kode Barang" />
                   <Pane prefHeight="25.0" prefWidth="69.0" />
-                  <TextField prefHeight="25.0" prefWidth="858.0" />
+                  <TextField fx:id="id_barang" prefHeight="25.0" prefWidth="858.0" />
                </children>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="10.0" />
@@ -118,7 +118,7 @@
                <children>
                   <Label text="Tanggal Berakhir" />
                   <Pane prefHeight="25.0" prefWidth="47.0" />
-                  <DatePicker prefHeight="25.0" prefWidth="857.0" />
+                  <DatePicker fx:id="tgl_selesai" prefHeight="25.0" prefWidth="857.0" />
                </children>
                <padding>
                   <Insets left="20.0" />

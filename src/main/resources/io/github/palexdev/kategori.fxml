@@ -107,7 +107,7 @@
                <children>
                   <Label text="Kode Kategori" />
                   <Pane prefHeight="65.0" prefWidth="61.0" />
-                  <TextField prefHeight="25.0" prefWidth="858.0" />
+                  <TextField fx:id="id_kategori" prefHeight="25.0" prefWidth="858.0" />
                </children>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="10.0" />
@@ -117,7 +117,7 @@
                <children>
                   <Label text="Nama Kategori" />
                   <Pane prefHeight="25.0" prefWidth="57.0" />
-                  <TextField prefHeight="25.0" prefWidth="857.0" />
+                  <TextField fx:id="nama_kategori" prefHeight="25.0" prefWidth="857.0" />
                </children>
                <padding>
                   <Insets left="20.0" />
@@ -140,8 +140,9 @@
             <TableView prefHeight="227.0" prefWidth="997.0">
                <columns>
                   <TableColumn prefWidth="283.99995934963226" text="Kode Kategori" />
-                  <TableColumn prefWidth="434.6667175292969" text="Nama Kategori" />
-                  <TableColumn prefWidth="276.8888854980469" text="Jumlah Barang" />
+                  <TableColumn prefWidth="328.0000305175781" text="Nama Kategori" />
+                  <TableColumn prefWidth="273.33331298828125" text="Jumlah Barang" />
+                  <TableColumn minWidth="0.0" prefWidth="110.0" text="Aksi" />
                </columns>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="20.0" />
