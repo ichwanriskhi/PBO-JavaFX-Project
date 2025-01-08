@@ -63,4 +63,29 @@ public class Barang {
     public Kategori getKategori() {
         return kategori;
     }
+
+    // Setter
+    public void setNamaBarang(String namaBarang) {
+        this.namaBarang = namaBarang;
+    }
+
+    public void setJenis(JenisBarang jenis) {
+        this.jenis = jenis;
+    }
+
+    public void setDeskripsi(String deskripsi) {
+        this.deskripsi = deskripsi;
+    }
+
+    public void setNamaPenjual(String namaPenjual) {
+        this.namaPenjual = namaPenjual;
+    }
+
+    public void setHargaAwal(int hargaAwal) {
+        this.hargaAwal = hargaAwal;
+    }
+
+    public void setKategori(Kategori kategori) {
+        this.kategori = kategori;
+    }
 }

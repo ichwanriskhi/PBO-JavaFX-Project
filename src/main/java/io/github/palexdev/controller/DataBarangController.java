@@ -9,6 +9,7 @@ import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.scene.control.ButtonType;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
@@ -21,8 +22,11 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.TextArea;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
-
+import javafx.scene.control.Button;
+import javafx.scene.control.TableCell;
+import javafx.util.Callback;
 import java.io.IOException;
 import java.util.List;
 
@@ -117,6 +121,17 @@ public class DataBarangController {
         harga_awal.clear();
     }
 
+    private boolean showConfirmation(String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle("Konfirmasi");
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+    
+        // Menunggu respons dari pengguna
+        return alert.showAndWait().filter(response -> response == ButtonType.OK).isPresent();
+    }
+    
+
     @FXML
     public void initialize() {
         try {
@@ -130,6 +145,62 @@ public class DataBarangController {
             colPenjual.setCellValueFactory(new PropertyValueFactory<>("namaPenjual"));
             colHarga.setCellValueFactory(new PropertyValueFactory<>("hargaAwal"));
             colTanggalMasuk.setCellValueFactory(new PropertyValueFactory<>("tglMasuk"));
+            // Tambahkan ke dalam `initialize` method
+            colAksi.setCellFactory(new Callback<TableColumn<Barang, String>, TableCell<Barang, String>>() {
+                @Override
+                public TableCell<Barang, String> call(TableColumn<Barang, String> param) {
+                    return new TableCell<>() {
+                        private final Button btnEdit = new Button("Edit");
+                        private final Button btnHapus = new Button("Hapus");
+                        private final HBox actionButtons = new HBox(5, btnEdit, btnHapus);
+
+                        {
+                            btnEdit.setOnAction(event -> {
+                                Barang barang = getTableView().getItems().get(getIndex());
+                                try {
+                                    FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/github/palexdev/editbarang.fxml"));
+                                    Parent root = loader.load();
+
+                                    // Kirim data barang ke controller edit
+                                    EditBarangController controller = loader.getController();
+                                    controller.setBarangData(barang);
+
+                                    Stage stage = new Stage();
+                                    stage.setScene(new Scene(root));
+                                    stage.setTitle("Edit Barang");
+                                    stage.show();
+                                } catch (IOException e) {
+                                    System.err.println("Error loading edit barang view: " + e.getMessage());
+                                }
+                            });
+
+                            btnHapus.setOnAction(event -> {
+                                Barang barang = getTableView().getItems().get(getIndex());
+                                boolean confirm = showConfirmation("Apakah Anda yakin ingin menghapus barang ini?");
+                                if (confirm) {
+                                    if (BarangDAO.deleteBarang(barang.getIdBarang())) {
+                                        getTableView().getItems().remove(barang);
+                                        showAlert("Sukses", "Barang berhasil dihapus!", Alert.AlertType.INFORMATION);
+                                    } else {
+                                        showAlert("Error", "Barang tidak bisa dihapus karena sudah terdaftar di tabel lelang!", Alert.AlertType.ERROR);
+                                    }
+                                }
+                            });
+                            
+                        }
+
+                        @Override
+                        protected void updateItem(String item, boolean empty) {
+                            super.updateItem(item, empty);
+                            if (empty) {
+                                setGraphic(null);
+                            } else {
+                                setGraphic(actionButtons);
+                            }
+                        }
+                    };
+                }
+            });
 
             // Ambil data dari DAO
             ObservableList<Barang> barangList = FXCollections.observableArrayList(BarangDAO.getAllBarang());

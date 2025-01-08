@@ -197,7 +197,7 @@
                <TableColumn fx:id="colPenjual" prefWidth="107.33334350585938" text="Penjual" />
                <TableColumn fx:id="colHarga" prefWidth="122.0" text="Harga" />
                <TableColumn fx:id="colTanggalMasuk" prefWidth="143.333251953125" text="Tanggal Masuk" />
-                  <TableColumn fx:id="colAksi" prefWidth="152.0" text="Aksi" />
+               <TableColumn fx:id="colAksi" prefWidth="152.0" text="Aksi" />
               </columns>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="20.0" />

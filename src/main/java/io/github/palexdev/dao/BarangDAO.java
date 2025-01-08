@@ -64,4 +64,50 @@ public class BarangDAO {
             return false;
         }
     }
+
+    public static boolean deleteBarang(int idBarang) {
+        String checkQuery = "SELECT COUNT(*) FROM lelang WHERE id_barang = ?";
+        String deleteQuery = "DELETE FROM barang WHERE id_barang = ?";
+    
+        try (Connection conn = DatabaseConnection.getConnection()) {
+            // Periksa apakah barang sudah ada di tabel lelang
+            try (PreparedStatement checkStmt = conn.prepareStatement(checkQuery)) {
+                checkStmt.setInt(1, idBarang);
+                ResultSet rs = checkStmt.executeQuery();
+                if (rs.next() && rs.getInt(1) > 0) {
+                    System.err.println("Barang tidak bisa dihapus karena sudah ada di tabel lelang.");
+                    return false;
+                }
+            }
+    
+            // Hapus barang jika tidak ada di tabel lelang
+            try (PreparedStatement deleteStmt = conn.prepareStatement(deleteQuery)) {
+                deleteStmt.setInt(1, idBarang);
+                return deleteStmt.executeUpdate() > 0;
+            }
+        } catch (SQLException e) {
+            System.err.println("Error deleting barang: " + e.getMessage());
+            return false;
+        }
+    }
+    
+
+    public static boolean updateBarang(Barang barang) {
+        String query = "UPDATE barang SET nama_barang = ?, jenis = ?, id_kategori = ?, deskripsi = ?, nama_penjual = ?, harga_awal = ? WHERE id_barang = ?";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, barang.getNamaBarang());
+            stmt.setString(2, barang.getJenis().toString());
+            stmt.setString(3, barang.getKategori().getIdKategori());
+            stmt.setString(4, barang.getDeskripsi());
+            stmt.setString(5, barang.getNamaPenjual());
+            stmt.setInt(6, barang.getHargaAwal());
+            stmt.setInt(7, barang.getIdBarang());
+            return stmt.executeUpdate() > 0;
+        } catch (SQLException e) {
+            System.err.println("Error updating barang: " + e.getMessage());
+            return false;
+        }
+    }
+    
 }
