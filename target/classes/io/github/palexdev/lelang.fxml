@@ -107,7 +107,7 @@
                <children>
                   <Label text="Kode Barang" />
                   <Pane prefHeight="25.0" prefWidth="69.0" />
-                  <ChoiceBox prefHeight="25.0" prefWidth="857.0" />
+                  <ChoiceBox fx:id="choiceBoxBarang" prefHeight="25.0" prefWidth="857.0" />
                </children>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="10.0" />
@@ -121,7 +121,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
                <children>
-                  <MFXButton alignment="CENTER" rippleColor="#4154f1" text="Simpan" />
+                  <MFXButton fx:id="simpanButton" alignment="CENTER" onAction="#handleSimpanLelang" rippleColor="#4154f1" text="Simpan" />
                </children>
             </HBox>
             <TableView fx:id="tableLelang" prefHeight="227.0" prefWidth="997.0">

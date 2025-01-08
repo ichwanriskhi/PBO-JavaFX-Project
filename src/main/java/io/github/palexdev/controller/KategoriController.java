@@ -10,8 +10,10 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Alert;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 
@@ -61,6 +63,53 @@ public class KategoriController {
     private void handleKategoriView(ActionEvent event) {
         loadView(event, "kategori.fxml", "Kategori");
     }
+
+    @FXML
+    private TextField id_kategori;
+    @FXML
+    private TextField nama_kategori;
+
+    @FXML
+    private void handleSimpanKategori(ActionEvent event) {
+        String idKategori = id_kategori.getText();
+        String namaKategori = nama_kategori.getText();
+
+        // Validasi input
+        if (idKategori.isEmpty() || namaKategori.isEmpty()) {
+            showAlert("Error", "Semua data harus diisi!", Alert.AlertType.ERROR);
+            return;
+        }
+
+        try {
+            // Simpan kategori ke database
+            Kategori kategori = new Kategori(idKategori, namaKategori, 0); // 0 karena kategori baru
+            boolean success = KategoriDAO.createKategori(kategori);
+
+            if (success) {
+                showAlert("Sukses", "Kategori berhasil disimpan!", Alert.AlertType.INFORMATION);
+                clearForm(); // Bersihkan form setelah sukses
+            } else {
+                showAlert("Error", "Gagal menyimpan kategori!", Alert.AlertType.ERROR);
+            }
+        } catch (IllegalArgumentException e) {
+            showAlert("Error", e.getMessage(), Alert.AlertType.ERROR);
+        } catch (Exception e) {
+            showAlert("Error", "Terjadi kesalahan saat menyimpan kategori!", Alert.AlertType.ERROR);
+        }
+    }
+
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void clearForm() {
+        id_kategori.clear();
+        nama_kategori.clear();
+    }
+
 
     private void loadView(ActionEvent event, String fxmlFile, String title) {
         try {

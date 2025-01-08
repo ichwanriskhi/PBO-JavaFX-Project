@@ -8,6 +8,26 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class LelangDAO {
+
+    public static void insertLelang(Lelang lelang) {
+        String query = "INSERT INTO lelang (id_barang, nama_pembeli, harga_akhir, tgl_dibuka, tgl_selesai, status) " +
+                "VALUES (?, ?, ?, NOW(), ?, ?)";
+    
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+    
+            statement.setInt(1, lelang.getBarang().getIdBarang());
+            statement.setString(2, lelang.getNamaPembeli());
+            statement.setInt(3, lelang.getHargaAkhir());
+            statement.setString(4, lelang.getTglSelesai());
+            statement.setString(5, lelang.getStatus());
+    
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error inserting lelang data: " + e.getMessage());
+        }
+    }    
+
     public static List<Lelang> getAllLelang() {
         List<Lelang> lelangList = new ArrayList<>();
         String query = "SELECT lelang.*, barang.*, kategori.id_kategori, kategori.nama_kategori " +
@@ -29,7 +49,7 @@ public class LelangDAO {
                 Barang barang = new Barang(
                     resultSet.getInt("id_barang"),
                     resultSet.getString("nama_barang"),
-                    resultSet.getString("jenis"),
+                    JenisBarang.valueOf(resultSet.getString("jenis")),
                     resultSet.getString("deskripsi"),
                     resultSet.getString("nama_penjual"),
                     resultSet.getInt("harga_awal"),

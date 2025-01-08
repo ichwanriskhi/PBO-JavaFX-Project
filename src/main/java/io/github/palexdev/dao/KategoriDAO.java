@@ -8,6 +8,25 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class KategoriDAO {
+
+    public static boolean createKategori(Kategori kategori) {
+        String query = "INSERT INTO kategori (id_kategori, nama_kategori) VALUES (?, ?)";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, kategori.getIdKategori());
+            statement.setString(2, kategori.getNamaKategori());
+
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error saving kategori: " + e.getMessage());
+            return false;
+        }
+    }
+
     public static List<Kategori> getAllKategori() {
         List<Kategori> kategoriList = new ArrayList<>();
 

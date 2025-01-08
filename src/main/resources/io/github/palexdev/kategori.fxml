@@ -131,7 +131,7 @@
                   <Insets left="20.0" />
                </padding>
                <children>
-                  <MFXButton alignment="CENTER" rippleColor="#4154f1" text="Simpan" />
+                  <MFXButton fx:id="simpanKategoriBtn" alignment="CENTER" onAction="#handleSimpanKategori" rippleColor="#4154f1" text="Simpan" />
                </children>
                <VBox.margin>
                   <Insets top="10.0" />

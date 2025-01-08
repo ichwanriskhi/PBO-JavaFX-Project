@@ -2,6 +2,7 @@ package io.github.palexdev.dao;
 
 import io.github.palexdev.DatabaseConnection;
 import io.github.palexdev.model.Barang;
+import io.github.palexdev.model.JenisBarang;
 import io.github.palexdev.model.Kategori;
 
 import java.sql.*;
@@ -29,7 +30,7 @@ public class BarangDAO {
                 Barang barang = new Barang(
                     resultSet.getInt("id_barang"),
                     resultSet.getString("nama_barang"),
-                    resultSet.getString("jenis"),
+                    JenisBarang.valueOf(resultSet.getString("jenis")),
                     resultSet.getString("deskripsi"),
                     resultSet.getString("nama_penjual"),
                     resultSet.getInt("harga_awal"),
@@ -52,7 +53,7 @@ public class BarangDAO {
         try (Connection conn = DatabaseConnection.getConnection();
              PreparedStatement stmt = conn.prepareStatement(query)) {
             stmt.setString(1, barang.getNamaBarang());
-            stmt.setString(2, barang.getJenis());
+            stmt.setString(2, barang.getJenis().toString());
             stmt.setString(3, barang.getKategori().getIdKategori());
             stmt.setString(4, barang.getDeskripsi());
             stmt.setString(5, barang.getNamaPenjual());

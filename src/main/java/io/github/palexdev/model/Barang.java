@@ -3,7 +3,7 @@ package io.github.palexdev.model;
 public class Barang {
     private int idBarang;
     private String namaBarang;
-    private String jenis;
+    private JenisBarang jenis;
     private String deskripsi;
     private String namaPenjual;
     private int hargaAwal;
@@ -11,7 +11,7 @@ public class Barang {
     private Kategori kategori;
 
     // Constructor tanpa idBarang (untuk auto increment)
-    public Barang(String namaBarang, String jenis, String deskripsi, String namaPenjual, int hargaAwal, Kategori kategori) {
+    public Barang(String namaBarang, JenisBarang jenis, String deskripsi, String namaPenjual, int hargaAwal, Kategori kategori) {
         this.namaBarang = namaBarang;
         this.jenis = jenis;
         this.deskripsi = deskripsi;
@@ -21,7 +21,7 @@ public class Barang {
     }
 
     // Constructor dengan idBarang (untuk membaca data dari database)
-    public Barang(int idBarang, String namaBarang, String jenis, String deskripsi, String namaPenjual, int hargaAwal, String tglMasuk, Kategori kategori) {
+    public Barang(int idBarang, String namaBarang, JenisBarang jenis, String deskripsi, String namaPenjual, int hargaAwal, String tglMasuk, Kategori kategori) {
         this.idBarang = idBarang;
         this.namaBarang = namaBarang;
         this.jenis = jenis;
@@ -40,7 +40,7 @@ public class Barang {
         return namaBarang;
     }
 
-    public String getJenis() {
+    public JenisBarang getJenis() {
         return jenis;
     }
 

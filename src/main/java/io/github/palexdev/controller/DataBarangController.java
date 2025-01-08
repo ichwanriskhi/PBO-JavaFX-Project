@@ -4,6 +4,7 @@ import io.github.palexdev.dao.BarangDAO;
 import io.github.palexdev.dao.KategoriDAO;
 import io.github.palexdev.model.Barang;
 import io.github.palexdev.model.Kategori;
+import io.github.palexdev.model.JenisBarang;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -51,7 +52,7 @@ public class DataBarangController {
     private TextField nama_barang; // untuk nama barang
 
     @FXML
-    private ChoiceBox<String> jenis; // untuk jenis barang
+    private ChoiceBox<JenisBarang> jenis; // untuk jenis barang
 
     @FXML
     private ChoiceBox<Kategori> id_kategori; // untuk kategori barang
@@ -70,7 +71,7 @@ public class DataBarangController {
         try {
             // Ambil data dari form
             String namaBarang = nama_barang.getText();
-            String jenisBarang = jenis.getValue();
+            JenisBarang jenisBarang = jenis.getValue();
             Kategori kategori = id_kategori.getValue();
             String deskripsiBarang = deskripsi.getText();
             String namaPenjual = nama_penjual.getText();
@@ -153,6 +154,9 @@ public class DataBarangController {
                     return null; // Tidak digunakan, karena kita hanya perlu menampilkan nama kategori
                 }
             });
+
+            // Mengisi ChoiceBox dengan jenis barang (enum JenisBarang)
+            jenis.setItems(FXCollections.observableArrayList(JenisBarang.values()));
             
         } catch (Exception e) {
             System.err.println("Error during initialization: " + e.getMessage());
