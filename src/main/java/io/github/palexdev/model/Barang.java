@@ -10,6 +10,17 @@ public class Barang {
     private String tglMasuk;
     private Kategori kategori;
 
+    // Constructor tanpa idBarang (untuk auto increment)
+    public Barang(String namaBarang, String jenis, String deskripsi, String namaPenjual, int hargaAwal, Kategori kategori) {
+        this.namaBarang = namaBarang;
+        this.jenis = jenis;
+        this.deskripsi = deskripsi;
+        this.namaPenjual = namaPenjual;
+        this.hargaAwal = hargaAwal;
+        this.kategori = kategori;
+    }
+
+    // Constructor dengan idBarang (untuk membaca data dari database)
     public Barang(int idBarang, String namaBarang, String jenis, String deskripsi, String namaPenjual, int hargaAwal, String tglMasuk, Kategori kategori) {
         this.idBarang = idBarang;
         this.namaBarang = namaBarang;

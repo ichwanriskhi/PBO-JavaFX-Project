@@ -137,11 +137,11 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <TableView prefHeight="227.0" prefWidth="997.0">
+            <TableView fx:id="tableKategori" prefHeight="227.0" prefWidth="997.0">
                <columns>
-                  <TableColumn prefWidth="283.99995934963226" text="Kode Kategori" />
-                  <TableColumn prefWidth="328.0000305175781" text="Nama Kategori" />
-                  <TableColumn prefWidth="273.33331298828125" text="Jumlah Barang" />
+                  <TableColumn fx:id="colIdKategori" prefWidth="283.99995934963226" text="Kode Kategori" />
+                  <TableColumn fx:id="colNamaKategori" prefWidth="328.0000305175781" text="Nama Kategori" />
+                  <TableColumn fx:id="colJumlahBarang" prefWidth="273.33331298828125" text="Jumlah Barang" />
                   <TableColumn minWidth="0.0" prefWidth="110.0" text="Aksi" />
                </columns>
                <VBox.margin>

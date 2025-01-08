@@ -11,9 +11,9 @@ import java.util.List;
 public class BarangDAO {
     public static List<Barang> getAllBarang() {
         List<Barang> barangList = new ArrayList<>();
-        String query = "SELECT barang.*, kategori.* " +
-               "FROM barang " +
-               "JOIN kategori ON barang.id_kategori = kategori.id_kategori;";
+        String query = "SELECT barang.*, kategori.id_kategori, kategori.nama_kategori " +
+                       "FROM barang " +
+                       "JOIN kategori ON barang.id_kategori = kategori.id_kategori;";
 
         try (Connection connection = DatabaseConnection.getConnection();
              Statement statement = connection.createStatement();
@@ -22,7 +22,8 @@ public class BarangDAO {
             while (resultSet.next()) {
                 Kategori kategori = new Kategori(
                     resultSet.getString("id_kategori"),
-                    resultSet.getString("nama_kategori")
+                    resultSet.getString("nama_kategori"),
+                    0
                 );
 
                 Barang barang = new Barang(
@@ -44,5 +45,22 @@ public class BarangDAO {
         }
 
         return barangList;
+    }
+
+    public static boolean createBarang(Barang barang) {
+        String query = "INSERT INTO barang (nama_barang, jenis, id_kategori, deskripsi, nama_penjual, harga_awal, tgl_masuk) VALUES (?, ?, ?, ?, ?, ?, NOW())";
+        try (Connection conn = DatabaseConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(query)) {
+            stmt.setString(1, barang.getNamaBarang());
+            stmt.setString(2, barang.getJenis());
+            stmt.setString(3, barang.getKategori().getIdKategori());
+            stmt.setString(4, barang.getDeskripsi());
+            stmt.setString(5, barang.getNamaPenjual());
+            stmt.setInt(6, barang.getHargaAwal());
+            return stmt.executeUpdate() > 0;
+        } catch (Exception e) {
+            System.err.println("Error inserting barang: " + e.getMessage());
+            return false;
+        }
     }
 }

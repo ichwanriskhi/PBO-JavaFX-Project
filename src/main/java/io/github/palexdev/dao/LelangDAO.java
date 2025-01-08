@@ -10,7 +10,7 @@ import java.util.List;
 public class LelangDAO {
     public static List<Lelang> getAllLelang() {
         List<Lelang> lelangList = new ArrayList<>();
-        String query = "SELECT lelang.*, barang.*, kategori.* " +
+        String query = "SELECT lelang.*, barang.*, kategori.id_kategori, kategori.nama_kategori " +
                "FROM lelang " +
                "JOIN barang ON lelang.id_barang = barang.id_barang " +
                "JOIN kategori ON barang.id_kategori = kategori.id_kategori;";
@@ -22,7 +22,8 @@ public class LelangDAO {
             while (resultSet.next()) {
                 Kategori kategori = new Kategori(
                     resultSet.getString("id_kategori"),
-                    resultSet.getString("nama_kategori")
+                    resultSet.getString("nama_kategori"),
+                    0
                 );
 
                 Barang barang = new Barang(

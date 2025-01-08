@@ -13,6 +13,11 @@ import java.io.IOException;
 public class BerandaController {
 
     @FXML
+    private void handleBerandaView(ActionEvent event) {
+        loadView(event, "beranda.fxml", "Beranda");
+    }
+
+    @FXML
     private void handleLelangView(ActionEvent event) {
         loadView(event, "lelang.fxml", "Lelang");
     }

@@ -30,7 +30,7 @@
                               <Image url="@images/logo.png" />
                            </image>
                         </ImageView>
-                        <MFXButton maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="222.0" text="Beranda">
+                        <MFXButton fx:id="btnBeranda" maxWidth="1.7976931348623157E308" onAction="#handleBerandaView" prefHeight="39.0" prefWidth="222.0" text="Beranda">
                            <graphic>
                               <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -188,7 +188,7 @@
                   <Insets top="10.0" />
                </VBox.margin>
             </HBox>
-            <TableView prefHeight="227.0" prefWidth="997.0">
+            <TableView fx:id="tableBarang" prefHeight="227.0" prefWidth="997.0">
               <columns>
                 <TableColumn fx:id="colKodeBarang" prefWidth="91.9999669790268" text="Kode Barang" />
                <TableColumn fx:id="colNamaBarang" prefWidth="183.33333587646484" text="Nama Barang" />
@@ -197,7 +197,7 @@
                <TableColumn fx:id="colPenjual" prefWidth="107.33334350585938" text="Penjual" />
                <TableColumn fx:id="colHarga" prefWidth="122.0" text="Harga" />
                <TableColumn fx:id="colTanggalMasuk" prefWidth="143.333251953125" text="Tanggal Masuk" />
-                  <TableColumn fx:id="colTanggalMasuk1" prefWidth="152.0" text="Aksi" />
+                  <TableColumn fx:id="colAksi" prefWidth="152.0" text="Aksi" />
               </columns>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="20.0" />

@@ -23,7 +23,7 @@
                               <Image url="@images/logo.png" />
                            </image>
                         </ImageView>
-                        <MFXButton maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="222.0" text="Beranda">
+                        <MFXButton fx:id="btnBeranda" maxWidth="1.7976931348623157E308" onAction="#handleBerandaView" prefHeight="39.0" prefWidth="222.0" text="Beranda">
                            <graphic>
                               <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>

@@ -3,11 +3,10 @@
 <?import io.github.palexdev.materialfx.controls.MFXButton?>
 <?import io.github.palexdev.materialfx.controls.MFXScrollPane?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.ChoiceBox?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
-<?import javafx.scene.control.TextField?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.BorderPane?>
@@ -29,7 +28,7 @@
                               <Image url="@images/logo.png" />
                            </image>
                         </ImageView>
-                        <MFXButton maxWidth="1.7976931348623157E308" prefHeight="39.0" prefWidth="222.0" text="Beranda">
+                        <MFXButton fx:id="btnBeranda" maxWidth="1.7976931348623157E308" onAction="#handleBerandaView" prefHeight="39.0" prefWidth="222.0" text="Beranda">
                            <graphic>
                               <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -41,7 +40,7 @@
                               <Insets top="12.0" />
                            </VBox.margin>
                         </MFXButton>
-                        <MFXButton layoutX="10.0" layoutY="49.0" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="222.0" text="Data Barang">
+                        <MFXButton fx:id="btnDataBarang" layoutX="10.0" layoutY="49.0" maxWidth="1.7976931348623157E308" onAction="#handleDataBarangView" prefHeight="43.0" prefWidth="222.0" text="Data Barang">
                            <graphic>
                               <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -53,7 +52,7 @@
                               <Insets top="12.0" />
                            </VBox.margin>
                         </MFXButton>
-                        <MFXButton layoutX="10.0" layoutY="78.0" maxWidth="1.7976931348623157E308" prefHeight="43.0" prefWidth="222.0" text="Data Kategori">
+                        <MFXButton fx:id="btnKategori" layoutX="10.0" layoutY="78.0" maxWidth="1.7976931348623157E308" onAction="#handleKategoriView" prefHeight="43.0" prefWidth="222.0" text="Data Kategori">
                            <graphic>
                               <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -65,7 +64,7 @@
                               <Insets top="12.0" />
                            </VBox.margin>
                         </MFXButton>
-                        <MFXButton layoutX="10.0" layoutY="107.0" maxWidth="1.7976931348623157E308" prefHeight="47.0" prefWidth="222.0" text="Data Lelang">
+                        <MFXButton fx:id="btnLelang" layoutX="10.0" layoutY="107.0" maxWidth="1.7976931348623157E308" onAction="#handleLelangView" prefHeight="47.0" prefWidth="222.0" text="Data Lelang">
                            <graphic>
                               <ImageView fitHeight="13.0" fitWidth="11.0" pickOnBounds="true" preserveRatio="true">
                                  <image>
@@ -108,23 +107,10 @@
                <children>
                   <Label text="Kode Barang" />
                   <Pane prefHeight="25.0" prefWidth="69.0" />
-                  <TextField fx:id="id_barang" prefHeight="25.0" prefWidth="855.0" />
+                  <ChoiceBox prefHeight="25.0" prefWidth="857.0" />
                </children>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="10.0" />
-               </VBox.margin>
-            </HBox>
-            <HBox layoutX="45.0" layoutY="103.0" prefHeight="10.0" prefWidth="200.0">
-               <children>
-                  <Label text="Tanggal Berakhir" />
-                  <Pane prefHeight="25.0" prefWidth="47.0" />
-                  <DatePicker fx:id="tgl_selesai" prefHeight="25.0" prefWidth="857.0" />
-               </children>
-               <padding>
-                  <Insets left="20.0" />
-               </padding>
-               <VBox.margin>
-                  <Insets top="10.0" />
                </VBox.margin>
             </HBox>
             <HBox alignment="CENTER" layoutX="25.0" layoutY="138.0" prefHeight="10.0" prefWidth="200.0">
@@ -138,14 +124,16 @@
                   <MFXButton alignment="CENTER" rippleColor="#4154f1" text="Simpan" />
                </children>
             </HBox>
-            <TableView prefHeight="227.0" prefWidth="997.0">
+            <TableView fx:id="tableLelang" prefHeight="227.0" prefWidth="997.0">
                <columns>
-                  <TableColumn prefWidth="168.00000512599945" text="Nomor Lelang" />
-                  <TableColumn prefWidth="174.00001525878906" text="Kode Barang" />
-                  <TableColumn prefWidth="151.33331298828125" text="Nama Barang" />
-                  <TableColumn prefWidth="179.55551147460938" text="Tanggal Pembukaan" />
-                  <TableColumn prefWidth="199.11114501953125" text="Tanggal Berakhir" />
-                  <TableColumn prefWidth="122.22216796875" text="Status" />
+                  <TableColumn fx:id="colIdLelang" prefWidth="105.33331048488617" text="Nomor Lelang" />
+                  <TableColumn fx:id="colNamaBarang" prefWidth="139.33330535888672" text="Nama Barang" />
+                  <TableColumn fx:id="colNamaPembeli" prefWidth="141.99998474121094" text="Pembeli" />
+                  <TableColumn fx:id="colTanggalBuka" prefWidth="142.66665649414062" text="Tanggal Pembukaan" />
+                  <TableColumn fx:id="colTanggalAkhir" prefWidth="149.33331298828125" text="Tanggal Berakhir" />
+                  <TableColumn fx:id="colHargaAkhir" prefWidth="101.99993896484375" text="Harga Akhir" />
+                  <TableColumn fx:id="colStatus" prefWidth="107.33349609375" text="Status" />
+                  <TableColumn fx:id="colAksi" prefWidth="107.33335367838538" text="Aksi" />
                </columns>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="20.0" />
