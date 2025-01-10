@@ -26,6 +26,11 @@ public class Kategori {
         return namaKategori;
     }
 
+     // Setter untuk Nama Kategori
+     public void setNamaKategori(String namaKategori) {
+        this.namaKategori = namaKategori;
+    }
+
     // Getter untuk Jumlah Barang
     public int getJumlahBarang() {
         return jumlahBarang;

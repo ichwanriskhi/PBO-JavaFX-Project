@@ -59,4 +59,41 @@ public class KategoriDAO {
 
         return kategoriList;
     }
+
+    // Memperbarui data kategori di database
+    public static boolean updateKategori(Kategori kategori) {
+        String query = "UPDATE kategori SET nama_kategori = ? WHERE id_kategori = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, kategori.getNamaKategori());
+            statement.setString(2, kategori.getIdKategori());
+
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error updating kategori: " + e.getMessage());
+            return false;
+        }
+    }
+
+    // Menghapus kategori dari database
+    public static boolean deleteKategori(String idKategori) {
+        String query = "DELETE FROM kategori WHERE id_kategori = ?";
+
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+
+            statement.setString(1, idKategori);
+
+            int rowsAffected = statement.executeUpdate();
+            return rowsAffected > 0;
+
+        } catch (SQLException e) {
+            System.out.println("Error deleting kategori: " + e.getMessage());
+            return false;
+        }
+    }
 }

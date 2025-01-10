@@ -142,7 +142,7 @@
                   <TableColumn fx:id="colIdKategori" prefWidth="283.99995934963226" text="Kode Kategori" />
                   <TableColumn fx:id="colNamaKategori" prefWidth="328.0000305175781" text="Nama Kategori" />
                   <TableColumn fx:id="colJumlahBarang" prefWidth="273.33331298828125" text="Jumlah Barang" />
-                  <TableColumn minWidth="0.0" prefWidth="110.0" text="Aksi" />
+                  <TableColumn fx:id="colAksi" minWidth="0.0" prefWidth="110.0" text="Aksi" />
                </columns>
                <VBox.margin>
                   <Insets left="20.0" right="20.0" top="20.0" />
