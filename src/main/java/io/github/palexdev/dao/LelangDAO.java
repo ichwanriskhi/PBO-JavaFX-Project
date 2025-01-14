@@ -28,6 +28,24 @@ public class LelangDAO {
         }
     }    
 
+    public static void updateLelangStatus(Lelang lelang) {
+        String query = "UPDATE lelang SET status = ?, tgl_selesai = ?, nama_pembeli = ?, harga_akhir = ? WHERE id_lelang = ?";
+        try (Connection connection = DatabaseConnection.getConnection();
+             PreparedStatement statement = connection.prepareStatement(query)) {
+    
+            statement.setString(1, lelang.getStatus());
+            statement.setString(2, lelang.getTglSelesai());
+            statement.setString(3, lelang.getNamaPembeli());
+            statement.setInt(4, lelang.getHargaAkhir());
+            statement.setInt(5, lelang.getIdLelang());
+    
+            statement.executeUpdate();
+        } catch (SQLException e) {
+            System.out.println("Error updating lelang data: " + e.getMessage());
+        }
+    }
+    
+
     public static List<Lelang> getAllLelang() {
         List<Lelang> lelangList = new ArrayList<>();
         String query = "SELECT lelang.*, barang.*, kategori.id_kategori, kategori.nama_kategori " +

@@ -10,6 +10,7 @@ module io.github.palexdev {
 
     opens io.github.palexdev to javafx.fxml;
     opens io.github.palexdev.controller to javafx.fxml;
+    opens io.github.palexdev.view to javafx.fxml;
 
     exports io.github.palexdev;
     exports io.github.palexdev.controller;

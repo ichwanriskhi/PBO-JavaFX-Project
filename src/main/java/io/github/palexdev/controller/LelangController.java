@@ -18,11 +18,15 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.HashSet;
 import java.util.List;
+import javafx.scene.control.TableCell;
+import javafx.util.Callback;
 import java.util.Set;
 import java.io.IOException;
 
@@ -47,6 +51,10 @@ public class LelangController {
     private TableColumn<Lelang, Integer> colHargaAkhir;
     @FXML
     private TableColumn<Lelang, String> colStatus;
+    @FXML
+    private TableColumn<Lelang, Void> colAksi;
+    @FXML
+    private BorderPane rootLayout;
 
     @FXML
     public void initialize() {
@@ -61,19 +69,46 @@ public class LelangController {
         colHargaAkhir.setCellValueFactory(new PropertyValueFactory<>("hargaAkhir"));
         colStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
 
+        // Menambahkan kolom aksi dengan tombol "Tutup Lelang"
+        Callback<TableColumn<Lelang, Void>, TableCell<Lelang, Void>> cellFactory = param -> new TableCell<>() {
+            private final Button btnTutup = new Button("Tutup Lelang");
+
+            {
+                btnTutup.setOnAction(event -> {
+                    Lelang lelang = getTableView().getItems().get(getIndex());
+                    handleTutupLelang(lelang); // Panggil metode di luar cellFactory
+                });
+            }
+
+            @Override
+            protected void updateItem(Void item, boolean empty) {
+                super.updateItem(item, empty);
+                if (empty) {
+                    setGraphic(null);
+                } else {
+                    setGraphic(btnTutup);
+                    btnTutup.setOnAction(event -> {
+                        Lelang lelang = getTableView().getItems().get(getIndex());
+                        System.out.println("Tutup Lelang tombol diklik!"); // Tambahkan log
+                        handleTutupLelang(lelang);
+                    });
+                }
+            }
+        };
+
+        colAksi.setCellFactory(cellFactory);
+
         // Mengambil semua data lelang yang sudah ada dari database
-        List<Lelang> lelangData = LelangDAO.getAllLelang(); // Dapatkan data lelang dari database
+        List<Lelang> lelangData = LelangDAO.getAllLelang();
+        Set<Integer> barangSudahAdaDiLelang = new HashSet<>();
 
         // Membuat set untuk menyimpan ID barang yang sudah ada di lelang
-        Set<Integer> barangSudahAdaDiLelang = new HashSet<>();
         for (Lelang lelang : lelangData) {
             barangSudahAdaDiLelang.add(lelang.getBarang().getIdBarang());
         }
 
         // Mengambil daftar barang dari database
-        List<Barang> barangData = BarangDAO.getAllBarang(); // Misalnya ada method getAllBarang di BarangDAO
-
-        // ObservableList untuk ChoiceBox
+        List<Barang> barangData = BarangDAO.getAllBarang();
         ObservableList<String> barangList = FXCollections.observableArrayList();
 
         // Mengisi ChoiceBox dengan nama barang yang belum ada di tabel lelang
@@ -83,15 +118,14 @@ public class LelangController {
             }
         }
 
-        // Menetapkan barangList ke ChoiceBox
         choiceBoxBarang.setItems(barangList);
         choiceBoxBarang.getSelectionModel().selectFirst(); // Memilih barang pertama secara default
 
         // Mengisi TableView dengan data lelang yang ada
         ObservableList<Lelang> lelangList = FXCollections.observableArrayList(LelangDAO.getAllLelang());
         tableLelang.setItems(lelangList);
+        tableLelang.refresh();
     }
-
 
     // Metode untuk menangani navigasi antar view
     @FXML
@@ -119,7 +153,6 @@ public class LelangController {
         loadView(event, "kategori.fxml", "Kategori");
     }
 
-    // Dalam metode handleSimpanLelang atau kode Anda yang sesuai
     @FXML
     private void handleSimpanLelang(ActionEvent event) {
         // Mengambil barang yang dipilih dari ChoiceBox
@@ -154,9 +187,28 @@ public class LelangController {
         }
     }
 
+    private void handleTutupLelang(Lelang lelang) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/github/palexdev/tutuplelang.fxml"));
+            Parent tutupLelangView = loader.load();
+
+            // Mengakses controller dari FXML
+            TutupLelangController controller = loader.getController();
+            controller.setLelang(lelang); // Mengirim objek Lelang yang dipilih
+
+            Stage stage = new Stage();
+            stage.setTitle("Tutup Lelang");
+            stage.setScene(new Scene(tutupLelangView));
+            stage.show();
+            System.out.println("Tutup Lelang View ditampilkan.");
+        } catch (IOException e) {
+            System.err.println("Error loading tutup lelang view: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
+
     private void loadView(ActionEvent event, String fxmlFile, String title) {
         try {
-            // Sesuaikan path ke file FXML
             FXMLLoader loader = new FXMLLoader(getClass().getResource("/io/github/palexdev/" + fxmlFile));
             Parent root = loader.load();
             Scene scene = new Scene(root);
@@ -168,7 +220,8 @@ public class LelangController {
             stage.setTitle(title);
             stage.setScene(scene);
         } catch (IOException e) {
-            System.err.println("Gagal memuat file FXML: " + e.getMessage());
+            System.err.println("Gagal memuat file FXML: " + fxmlFile + ", Error: " + e.getMessage());
+            e.printStackTrace();
         }
     }
 }
