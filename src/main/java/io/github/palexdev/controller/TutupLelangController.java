@@ -35,20 +35,20 @@ public class TutupLelangController {
             }
 
             // Simpan perubahan
-            lelang.setNamaPembeli(namaPembeliField.getText());
+            Lelang.setNamaPembeli(namaPembeliField.getText());
             try {
                 int hargaAkhir = Integer.parseInt(hargaAkhirField.getText());
-                lelang.setHargaAkhir(hargaAkhir);
+                Lelang.setHargaAkhir(hargaAkhir);
             } catch (NumberFormatException e) {
                 System.err.println("Input harga akhir tidak valid: " + e.getMessage());
                 return;
             }
-            lelang.setStatus("Ditutup");
-            lelang.setTglSelesai(LocalDate.now().toString()); // Mengatur tanggal selesai menjadi hari ini
+            Lelang.setStatus("Ditutup");
+            Lelang.setTglSelesai(LocalDate.now().toString()); // Mengatur tanggal selesai menjadi hari ini
 
             // Memperbarui data di database
             try {
-                LelangDAO.updateLelangStatus(lelang);
+                LelangDAO.updateLelangStatus(elang);
             } catch (SQLException e) {
                 System.err.println("Gagal memperbarui status lelang di database: " + e.getMessage());
             }
